@@ -1,0 +1,64 @@
+{
+  "products": [
+    {
+      "id": "1",
+      "name": "Product 1",
+      "price": "100",
+      "color": "red",
+      "size": "S",
+      "quantity": "1",
+      "description": "This is product 1",
+      "image": "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png"
+    },
+    {
+      "id": "2",
+      "name": "Product 2",
+      "price": "200",
+      "color": "blue",
+      "size": "M",
+      "quantity": "2",
+      "description": "This is product 2",
+      "image": "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png"
+    },
+    {
+      "id": "3",
+      "name": "Product 3",
+      "price": "300",
+      "color": "green",
+      "size": "L",
+      "quantity": "3",
+      "description": "This is product 3",
+      "image": "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png"
+    },
+    {
+      "id": "4",
+      "name": "Product 4",
+      "price": "400",
+      "color": "yellow",
+      "size": "XL",
+      "quantity": "4",
+      "description": "This is product 4",
+      "image": "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png"
+    },
+    {
+      "id": "5",
+      "name": "Product 5",
+      "price": "500",
+      "color": "pink",
+      "size": "XXL",
+      "quantity": "5",
+      "description": "This is product 5",
+      "image": "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png"
+    },
+    {
+      "id": "6",
+        "name": "Product 6",
+        "price": "600",
+        "color": "black",
+        "size": "S",
+        "quantity": "0",
+        "description": "This is product 6",
+        "image": "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png"
+    }
+  ]
+}
