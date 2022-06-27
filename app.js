@@ -1,5 +1,6 @@
 //import express
 const express = require('express');
+const cors = require('cors')
 const bodyParser = require('body-parser')
 
 const {getAllProducts} = require('./helpers/products.js')
@@ -13,6 +14,7 @@ app.use( bodyParser.json() );       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
     extended: true
 }));
+app.use(cors())
 
 //Start server on port 8080
 const PORT = 8080;
