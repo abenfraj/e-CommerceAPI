@@ -5,6 +5,12 @@ const {orders} = require("../data/orders.json");
 const fs = require("fs");
 const {emptyCart} = require("./cart");
 
+/**
+ * Request to create an order
+ * @param req - request object
+ * @param res - response object
+ * @returns status code 200 if order was created successfully
+ */
 const createOrder = (req, res) => {
     if (Object.keys(cart).length === 0) {
         return res.status(400).json({
@@ -48,10 +54,22 @@ const createOrder = (req, res) => {
     res.status(200).json(newOrder);
 }
 
+/**
+ * Request to get all orders
+ * @param req - request object
+ * @param res - response object
+ * @returns status code 200 if orders were found successfully
+ */
 const getAllOrders = (req, res) => {
-    res.status(200).json(orders);
+    if (orders.length === 0) {
+        return res.status(400).json({
+            message: 'No orders found'
+        })
+    }
+    res.status(200).json(orders)
 }
 
+// exportation of functions
 module.exports = {
     createOrder,
     getAllOrders

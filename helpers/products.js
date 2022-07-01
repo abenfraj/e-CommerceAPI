@@ -1,5 +1,12 @@
 const {products} = require('../data/products.json')
 
+
+/**
+ * Request to get all products from products.json
+ * @param req - request object
+ * @param res - response object
+ * @returns status code 200 and all products from products.json if successful
+ */
 const getAllProducts = (req, res) => {
     let filteredProducts = products;
     const productColor = req.query.color;
@@ -31,6 +38,12 @@ const getAllProducts = (req, res) => {
     return res.status(200).json(filteredProducts);
 }
 
+/**
+ * Request to get a product by its ID from products.json
+ * @param req - request object
+ * @param res - response object
+ * @returns status code 200 and product with the given ID if successful
+ */
 const getProductById = (req, res) => {
     const productId = req.params.id;
     const product = products.find(product => {
@@ -44,6 +57,12 @@ const getProductById = (req, res) => {
     return res.status(200).json(product);
 }
 
+/**
+ * Request to get a product by its name, color and size from products.json
+ * @param req - request object
+ * @param res - response object
+ * @returns status code 200 and product with the given name, color and size if successful
+ */
 const getProductByNameColorSize = (req, res) => {
     const productName = req.params.name;
     const productColor = req.params.color;
@@ -59,6 +78,12 @@ const getProductByNameColorSize = (req, res) => {
     return res.status(200).json(product);
 }
 
+/**
+ * Request to get all colors of a product by its given name from products.json
+ * @param req - request object
+ * @param res - response object
+ * @returns status code 200 and all colors of a product with the given name if successful
+ */
 const getProductColors = (req, res) => {
     const productName = req.params.name;
     const product = products.filter(product => {
@@ -78,6 +103,12 @@ const getProductColors = (req, res) => {
     return res.status(200).json(colors);
 }
 
+/**
+ * Request to get all sizes of a product by its given name and color from products.json
+ * @param req - request object
+ * @param res - response object
+ * @returns status code 200 and all sizes of a product with the given name and color if successful
+ */
 const getProductSizesOfColor = (req, res) => {
     const productName = req.params.name;
     const productColor = req.params.color;
@@ -98,6 +129,7 @@ const getProductSizesOfColor = (req, res) => {
     return res.status(200).json(sizes);
 }
 
+// exportation of functions
 module.exports = {
     getAllProducts,
     getProductById,
