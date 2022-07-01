@@ -11,14 +11,24 @@ const createOrder = (req, res) => {
             message: 'Cart is empty'
         })
     }
+    let orderDate = new Date();
+
+    let date = ("0" + orderDate.getDate()).slice(-2);
+    let month = ("0" + (orderDate.getMonth() + 1)).slice(-2);
+    let year = orderDate.getFullYear();
+    let hours = orderDate.getHours();
+    let minutes = orderDate.getMinutes();
+    let seconds = orderDate.getSeconds();
+
+    orderDate = year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds;
 
     const shippingRequest = req.body;
     const newShippingInformation = [...shippingInformation, {id: uuidv4(), ...shippingRequest}];
 
-    const newOrder = {orderId: uuidv4(), products: cart, shippingInformation: shippingRequest}
+    const newOrder = {orderId: uuidv4(), products: cart, shippingInformation: shippingRequest, orderDate: orderDate};
     const newOrders = [...orders, newOrder];
 
-    fs.writeFile('./shippingInformation.json', JSON.stringify({shippingInformation: newShippingInformation}), (err) => {
+    fs.writeFile('./data/shippingInformation.json', JSON.stringify({shippingInformation: newShippingInformation}), (err) => {
         if (err) {
             res.status(500).json({
                 message: 'Error while saving shipping information'
@@ -28,7 +38,7 @@ const createOrder = (req, res) => {
         console.log('Shipping information updated');
     });
 
-    fs.writeFile('./orders.json', JSON.stringify({orders: newOrders}), (err) => {
+    fs.writeFile('./data/orders.json', JSON.stringify({orders: newOrders}), (err) => {
         if (err) throw err;
         console.log('Cart updated');
     });
@@ -38,6 +48,11 @@ const createOrder = (req, res) => {
     res.status(200).json(newOrder);
 }
 
+const getAllOrders = (req, res) => {
+    res.status(200).json(orders);
+}
+
 module.exports = {
-    createOrder
+    createOrder,
+    getAllOrders
 }

@@ -1,6 +1,4 @@
 const {products} = require('../data/products.json')
-const {cart} = require("../data/cart.json");
-const fs = require("fs");
 
 const getAllProducts = (req, res) => {
     let filteredProducts = products;
@@ -33,28 +31,77 @@ const getAllProducts = (req, res) => {
     return res.status(200).json(filteredProducts);
 }
 
-const checkProductAvailability = (req, res) => {
-    const productId = req.query.id;
-    const product = products.find(product => product.id === productId);
+const getProductById = (req, res) => {
+    const productId = req.params.id;
+    const product = products.find(product => {
+        return product.id === productId;
+    });
 
-    if (product != null) {
-        return res.status(404).json({
-            message: 'Product not found'
-        })
+    if (product == null) {
+        return res.status(404).send('Product not found')
     }
 
-    if (product.quantity > 0) {
-        return res.status(200).json({
-            message: 'Product available : quantity = ' + product.quantity
-        })
+    return res.status(200).json(product);
+}
+
+const getProductByNameColorSize = (req, res) => {
+    const productName = req.params.name;
+    const productColor = req.params.color;
+    const productSize = req.params.size;
+    const product = products.find(product => {
+        return product.name === productName && product.color === productColor && product.size === productSize;
+    });
+
+    if (product == null) {
+        return res.status(404).send('Product not found')
     }
 
-    return res.status(200).json({
-        message: 'Product not available : quantity = ' + product.quantity
-    })
+    return res.status(200).json(product);
+}
+
+const getProductColors = (req, res) => {
+    const productName = req.params.name;
+    const product = products.filter(product => {
+        return product.name === productName;
+    });
+
+    if (product == null) {
+        return res.status(404).send('Product not found')
+    }
+
+    const colors = product.map(product => {
+        return product.color;
+    }).filter((value, index, self) => {
+        return self.indexOf(value) === index;
+    }).sort();
+
+    return res.status(200).json(colors);
+}
+
+const getProductSizesOfColor = (req, res) => {
+    const productName = req.params.name;
+    const productColor = req.params.color;
+    const product = products.filter(product => {
+        return product.name === productName && product.color === productColor;
+    });
+
+    if (product == null) {
+        return res.status(404).send('Product not found')
+    }
+
+    const sizes = product.map(product => {
+        return product.size;
+    }).filter((value, index, self) => {
+        return self.indexOf(value) === index;
+    }).sort();
+
+    return res.status(200).json(sizes);
 }
 
 module.exports = {
     getAllProducts,
-    checkProductAvailability,
+    getProductById,
+    getProductColors,
+    getProductSizesOfColor,
+    getProductByNameColorSize
 }
